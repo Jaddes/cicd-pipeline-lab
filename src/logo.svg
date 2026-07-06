@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
-  <title id="title">Main environment logo</title>
-  <desc id="desc">Blue logo used by the main branch deployment.</desc>
-  <rect width="220" height="220" rx="32" fill="#e8f1ff"/>
-  <circle cx="110" cy="96" r="62" fill="#1463d9"/>
-  <path d="M68 92h84v18H68zM68 62h84v18H68zM82 122h56v18H82z" fill="#ffffff"/>
-  <text x="110" y="188" fill="#1463d9" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle">MAIN</text>
+  <title id="title">Dev environment logo</title>
+  <desc id="desc">Orange logo used by the dev branch deployment.</desc>
+  <rect width="220" height="220" rx="32" fill="#fff1e7"/>
+  <path d="M110 24 184 98 110 172 36 98z" fill="#f26522"/>
+  <circle cx="110" cy="98" r="36" fill="#ffffff"/>
+  <path d="M94 92h32v16H94zM102 62h16v72h-16z" fill="#f26522"/>
+  <text x="110" y="188" fill="#c84f17" font-family="Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle">DEV</text>
 </svg>
