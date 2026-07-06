@@ -30,29 +30,57 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'npm install'
-        sh 'npm run build'
+        script {
+          if (isUnix()) {
+            sh 'npm install'
+            sh 'npm run build'
+          } else {
+            bat 'npm install'
+            bat 'npm run build'
+          }
+        }
       }
     }
 
     stage('test') {
       steps {
-        sh 'CI=true npm test -- --watchAll=false'
+        script {
+          if (isUnix()) {
+            sh 'CI=true npm test -- --watchAll=false'
+          } else {
+            bat 'set CI=true&& npm test -- --watchAll=false'
+          }
+        }
       }
     }
 
     stage('build docker image') {
       steps {
-        sh 'docker build -t "${IMAGE_NAME}" .'
+        script {
+          if (isUnix()) {
+            sh 'docker build -t "${IMAGE_NAME}" .'
+          } else {
+            bat 'docker build -t "%IMAGE_NAME%" .'
+          }
+        }
       }
     }
 
     stage('deploy') {
       steps {
-        sh '''
-          docker rm -f "${CONTAINER_NAME}" || true
-          docker run -d --name "${CONTAINER_NAME}" -p "${APP_PORT}:3000" "${IMAGE_NAME}"
-        '''
+        script {
+          if (isUnix()) {
+            sh '''
+              docker rm -f "${CONTAINER_NAME}" || true
+              docker run -d --name "${CONTAINER_NAME}" -p "${APP_PORT}:3000" "${IMAGE_NAME}"
+            '''
+          } else {
+            bat '''
+              docker rm -f "%CONTAINER_NAME%" 2>NUL
+              docker run -d --name "%CONTAINER_NAME%" -p "%APP_PORT%:3000" "%IMAGE_NAME%"
+            '''
+          }
+        }
       }
     }
   }
