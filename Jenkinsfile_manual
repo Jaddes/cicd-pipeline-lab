@@ -41,9 +41,13 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
+            sh 'rm -rf "$WORKSPACE/.npm-cache"'
+            sh 'npm config set cache "$WORKSPACE/.npm-cache"'
             sh 'npm install'
             sh 'npm run build'
           } else {
+            bat 'if exist "%WORKSPACE%\\.npm-cache" rmdir /s /q "%WORKSPACE%\\.npm-cache"'
+            bat 'npm config set cache "%WORKSPACE%\\.npm-cache"'
             bat 'npm install'
             bat 'npm run build'
           }
